@@ -71,23 +71,28 @@
                     document.getElementById("mainScreen").style.display = "block"; 
                 }
             }
+            // shows account balance to user
             getBalance(bal) {
                 alert("Current Balance: $" +bal);
             }
+            // processes withdrawal
             withdrawal() {
                 this.amt = prompt("Enter withdrawal amount: ");
                 this.balance -= this.amt;
                 this.updateBalance();
             }
+            // processes deposit
             deposit() {
                 this.amt = prompt("Enter withdrawal amount: ");
                 this.balance += Number(this.amt);
                 this.updateBalance();
             }
+            // updates stored balance after withdrawals or deposits
             updateBalance() {
                 this.accounts[this.acctIndex].balance = this.balance;
                 localStorage.setItem("accounts",JSON.stringify(this.accounts));
             }
+            // updates pin for existing and new users
             updatePin() {
                 this.userPin = prompt("Enter new PIN: ");
                 this.accounts[this.acctIndex].pin = this.userPin;
