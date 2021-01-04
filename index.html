@@ -35,6 +35,7 @@
                     alert("Account not found.");
                 }
             }
+            // creates new account with pin. checks for existing accounts
             createAcct() {
                 let userPin = prompt("Enter PIN");
                 let isFound = this.pinExists(userPin);
@@ -42,7 +43,6 @@
                     alert("Account already exists");
                 }
                 else {
-                    //create account
                     this.switchScreens();
                     this.balance = 0;
                     this.currentPin = userPin;
@@ -51,12 +51,14 @@
                     localStorage.setItem("accounts",JSON.stringify(this.accounts));
                 }
             }
+            //
             pinExists(pin) {
                 this.accounts = JSON.parse(localStorage.getItem("accounts"));
                 for (let i=0;i<this.accounts.length;i++) {
                     if (Number(pin) === Number(this.accounts[i].pin)) {
                         this.acctIndex = i;
                         return this.accounts[i].balance;
+                        if (isFound === 0)
                     }
                 }
                 return false;
@@ -92,7 +94,7 @@
                 this.accounts[this.acctIndex].balance = this.balance;
                 localStorage.setItem("accounts",JSON.stringify(this.accounts));
             }
-            // updates pin for existing and new users
+            // 
             updatePin() {
                 this.userPin = prompt("Enter new PIN: ");
                 this.accounts[this.acctIndex].pin = this.userPin;
